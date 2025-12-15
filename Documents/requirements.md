@@ -67,7 +67,7 @@
 
 以下に本システムの主要なユースケースを示す。
 
-![UML](UML/KendoClub_KeyManagementWebApp_UML.jpg)<img width=10>
+![UML](UML/KendoClub_KeyManagementWebApp_UML.jpg)
 
 
 ### ユースケース記述
