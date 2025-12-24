@@ -27,13 +27,13 @@
 
 ### 3. 貸出履歴（Log）
 
-| 属性名           | 型       | 説明      | 制約          |
-| -----------     | --------- | -----    | ----------    |
-| Log_id          | String    | 履歴ID   | 主キー         |
-| User.student_id | String    | 利用者ID | 外部キー(User) |
-| Key.key_id      | String    | 鍵ID     | 外部キー(Key)  |
-| borrowed_at     | Timestamp | 貸出日時  | NOT NULL      |
-| returned_at     | Timestamp | 返却日時  | NULL可        |
+| 属性名      | 型        | 説明      | 制約                    |
+| ----------- | --------- | -----    | ----------              |
+| log_id      | String    | 履歴ID   | 主キー                   |
+| student_id  | String    | 利用者ID | 外部キー(User.student_id) |
+| key_id      | String    | 鍵ID     | 外部キー(Key.key_id)     |
+| borrowed_at | Timestamp | 貸出日時  | NOT NULL                |
+| returned_at | Timestamp | 返却日時  | NULL可                  |
 
 ---
 
@@ -56,13 +56,13 @@
 ## ER図（概念表現）
 
 ```
-User (user_id, name, role)
+User (student_id, name)
    |1
    |
    |N
-LoanHistory (history_id, borrowed_at, returned_at)
+LoanHistory (log_id, student_id, key_id, borrowed_at, returned_at)
    |N
    |
    |1
-Key (key_id, key_name, status)
+Key (key_id, name, status)
 ```
