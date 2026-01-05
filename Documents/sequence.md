@@ -1,5 +1,95 @@
 ## シーケンス図
 
+### S-1 トップ画面
+
+```mermaid
+sequenceDiagram
+    participant U as 利用者
+    participant T as トップ画面
+
+    U->>T: トップ画面表示
+    T-->>U: メニュー表示
+    U->>T: メニュー選択
+    T-->>U: 各画面へ遷移
+```
+
+### S-2 鍵貸出画面
+
+```mermaid
+sequenceDiagram
+    participant U as 利用者
+    participant S as 鍵貸出画面
+    participant DB as データベース
+
+    U->>S: 画面表示
+    S->>DB: 利用者一覧取得
+    DB-->>S: 利用者一覧
+    U->>S: 利用者選択
+    S->>DB: 貸出可能な鍵取得
+    DB-->>S: 鍵一覧
+    U->>S: 鍵選択・貸出実行
+    S->>DB: 貸出履歴登録
+    S->>DB: 鍵状態更新
+    DB-->>S: 完了
+    S-->>U: トップ画面へ遷移
+```
+
+### S-3 鍵返却画面
+
+```mermaid
+sequenceDiagram
+    participant U as 利用者
+    participant S as 鍵返却画面
+    participant DB as データベース
+
+    U->>S: 画面表示
+    S->>DB: 利用者一覧取得
+    DB-->>S: 利用者一覧
+    U->>S: 利用者選択
+    S->>DB: 貸出中の鍵取得
+    DB-->>S: 鍵一覧
+    U->>S: 鍵選択・返却実行
+    S->>DB: 返却日時更新
+    S->>DB: 鍵状態更新
+    DB-->>S: 完了
+    S-->>U: トップ画面へ遷移
+```
+
+### S-4 管理者ログイン画面
+
+```mermaid
+sequenceDiagram
+    participant A as 管理者
+    participant L as ログイン画面
+    participant DB as データベース
+
+    A->>L: 学籍番号・パスワード入力
+    L->>DB: 認証情報照合
+    DB-->>L: 認証結果
+    alt 認証成功
+        L-->>A: 履歴一覧画面へ遷移
+    else 認証失敗
+        L-->>A: エラーメッセージ表示
+    end
+```
+
+### S-5 履歴一覧画面
+
+```mermaid
+sequenceDiagram
+    participant A as 管理者
+    participant H as 履歴一覧画面
+    participant DB as データベース
+
+    A->>H: 画面表示
+    H->>DB: 貸出履歴取得
+    DB-->>H: 履歴一覧
+    A->>H: CSV出力指示
+    H->>DB: 履歴再取得
+    DB-->>H: データ
+    H-->>A: CSVダウンロード
+```
+
 ### S-2 鍵貸出処理 シーケンス図
 
 ```mermaid
